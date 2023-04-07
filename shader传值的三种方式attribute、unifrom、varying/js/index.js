@@ -6,9 +6,9 @@ let gl = canvas.getContext('webgl');
 let vertexShader = `
     attribute vec2 a_position;
     uniform float u_size;
-    varying vec2 v_xx;
+    varying vec2 v_color;
     void main(){
-        v_xx = a_position;
+        v_color = a_position;
         gl_Position = vec4(a_position,0.0,1.0);
         gl_PointSize = u_size;
     }
@@ -19,10 +19,10 @@ let fragmentShader = `
     precision mediump float;
     uniform vec3 u_color;
 
-    varying vec2 v_xx;
+    varying vec2 v_color;
     void main(){
         // gl_FragColor = vec4(u_color,1.0);
-        gl_FragColor = vec4(v_xx,0.5,1.0);
+        gl_FragColor = vec4(v_color,0.5,1.0);
     }
 `;
 
@@ -47,7 +47,6 @@ gl.uniform3f(u_color, 0.0, 1.0, 1.0);
 let u_size = gl.getUniformLocation(gl.program, 'u_size');
 gl.uniform1f(u_size, 50.0);
 
-// 3、varying
-
+// 3、varying  直接在着色器中改
 
 gl.drawArrays(gl.POINTS, 0, 1);

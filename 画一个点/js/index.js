@@ -88,7 +88,6 @@ let fragmentShader = `
 
 initShaders(gl, vertexShader, fragmentShader);
 
-
 // 清除填充区颜色
 gl.clearColor(0.0, 0.0, 0.0, 0.5);
 gl.clear(gl.COLOR_BUFFER_BIT);
