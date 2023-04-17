@@ -29,6 +29,7 @@ initShaders(gl, vertexShader, fragmentShader);
 initBuffers(gl);
 initTextures(gl);
 
+//加载图片
 function initTextures(gl) {
     // 翻转图片的y轴,默认是不翻转
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
@@ -39,7 +40,7 @@ function initTextures(gl) {
     let image = new Image();
     image.src = './imgs/cat_512x512.jpg';
     // 异步的过程：图片加载完之后执行这个函数的任务
-    image.onload = function() {
+    image.onload = function () {
         // 激活图片，放在第0个单元上边
         gl.activeTexture(gl.TEXTURE0);
         //绑定贴图
@@ -89,8 +90,6 @@ function initBuffers(gl) {
     gl.vertexAttribPointer(a_uv, 2, gl.FLOAT, false, F_SIZE * 2, 0)
     gl.enableVertexAttribArray(a_uv);
 }
-
-
 
 function draw(gl) {
     // 清除画布

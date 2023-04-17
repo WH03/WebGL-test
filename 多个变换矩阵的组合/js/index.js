@@ -1,6 +1,6 @@
 // 引入包
 import initShaders from './initShaders.js'
-import { mat4, glMatrix } from './gl_matrix/dist/esm/index.js'
+import { mat4, glMatrix } from '../gl_matrix/dist/esm/index.js'
 
 let canvas = document.querySelector('#webgl');
 let gl = canvas.getContext('webgl');

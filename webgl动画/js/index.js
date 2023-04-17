@@ -23,11 +23,6 @@ let fragmentShader = `
 
 initShaders(gl, vertexShader, fragmentShader);
 
-
-
-
-
-
 initvertexBuffers(gl);
 
 function initvertexBuffers(gl) {
