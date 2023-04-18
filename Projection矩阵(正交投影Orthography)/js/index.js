@@ -11,10 +11,49 @@ initShaders(gl, vertexShader, fragmentShader);
 
 initBuffers(gl);
 
+
+// 视图矩阵 ViewMatrix
+let viewMatrix = mat4.create();
+// lookAt(out,eye,center,uo);
+
+let eye = [0, 0, 1];
+mat4.lookAt(viewMatrix, eye, [0, 0, 0], [0, 1, 0]);
+
+let u_viewMatrix = gl.getUniformLocation(gl.program, 'u_viewMatrix');
+gl.uniformMatrix4fv(u_viewMatrix, false, viewMatrix);
+
+// 投影矩阵ProjectionMatrix--正交投影orthography
+// ortho(out,left,right,bottom,top,near,far)
+
+let orthoMatrix = mat4.create();
+
+mat4.ortho(orthoMatrix, -1, 1, -1, 1, 0.001, 100);
+
+let u_projMatrix = gl.getUniformLocation(gl.program, 'u_projMatrix');
+gl.uniformMatrix4fv(u_projMatrix, false, orthoMatrix);
+
+
+function animate() {
+    let time = Date.now() * 0.001;
+    eye[0] = Math.sin(time);
+    eye[2] = Math.cos(time);
+
+    mat4.lookAt(viewMatrix, eye, [0, 0, 0], [0, 1, 0]);
+
+    gl.uniformMatrix4fv(u_viewMatrix, false, viewMatrix);
+
+
+    draw(gl);
+    requestAnimationFrame(animate);
+
+}
+animate();
+
 draw(gl);
 
 function initBuffers(gl) {
-    let vertices = new Float32Array([-0.8, -0.5, -0.5, 1.0, 0.0, 0.0,
+    let vertices = new Float32Array([
+        -0.8, -0.5, -0.5, 1.0, 0.0, 0.0,
         0.0, 0.8, -0.5, 1.0, 0.0, 0.0,
         0.8, -0.5, -0.5, 1.0, 0.0, 0.0,
 
